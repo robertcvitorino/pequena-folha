@@ -4,15 +4,21 @@ namespace App\Filament\Mav\Resources\CompostagemResource\Form;
 
 use App\Enums\TipoResiduo;
 use App\Models\Material;
+use Filament\Forms\Components\Actions;
+use Filament\Forms\Components\Actions\Action as FormAction;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
-use Novadaemon\FilamentCombobox\Combobox;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\HtmlString;
 
 abstract class CompostagemForm
 {
@@ -30,8 +36,10 @@ abstract class CompostagemForm
                         ->afterStateUpdated( function (Set $set) {
                             $set('material_id', null);
                         })
+                        ->default( TipoResiduo::Organico->value)
                         ->required()
                         ->live(),
+
                     DateTimePicker::make('data')
                         ->default(now())
                         ->columns(1),
@@ -51,24 +59,98 @@ abstract class CompostagemForm
                         ->required(),
 
                     TextInput::make('descricao')
+                        ->label('Outros materiais')
                         ->maxLength(255),
 
-                    TextInput::make('volume')
-                        ->suffix( 'L')
+                    Radio::make('volume.quantidade')
+                        ->label('Volume')
+                        ->columns(2)
+                        ->reactive()
                         ->required()
-                        ->numeric(),
+                        ->options(function (Get $get) {
+                            $tipo = $get('tipo');
+
+                            if ($tipo == TipoResiduo::Inorganico->value) {
+                                return [
+                                    'Sacola de supermercado (5 Litros)' => 'Sacola de supermercado (5 Litros)',
+                                    'Saco de lixo (15 Litros)' => 'Saco de lixo (15 Litros)',
+                                    'Saco de lixo (30 Litros)' => 'Saco de lixo (30 Litros)',
+                                    'Saco de lixo (50 Litros)' => 'Saco de lixo (50 Litros)',
+                                    'Mais de 50 Litros' => 'Mais de 50 Litros',
+                                    'O' => 'Outro',
+                                ];
+                            }
+                            else if ($tipo == TipoResiduo::Organico->value) {
+
+                                return [
+                                    '1 pote de sorvete cheio' => '1 pote de sorvete cheio',
+                                    '1/2 pote de sorvete' => '1/2 pote de sorvete',
+                                    '2 potes de sorvete cheios' => '2 potes de sorvete cheios',
+                                    '1 pote e 1/2 de sorvete' => '1 pote e 1/2 de sorvete',
+                                    '1/3 do pote de sorvete' => '1/3 do pote de sorvete',
+                                    'O' => 'Outro',
+                                ];
+                            }else if ($tipo == TipoResiduo::Rejeito->value){
+                                return [
+                                    'Sacola de supermercado (5 Litros)' => 'Sacola de supermercado (5 Litros)',
+                                    'Saco de lixo (15 Litros)' => 'Saco de lixo (15 Litros)',
+                                    'Saco de lixo (30 Litros)' => 'Saco de lixo (30 Litros)',
+                                    'Saco de lixo (50 Litros)' => 'Saco de lixo (50 Litros)',
+                                    'Mais de 50 Litros' => 'Mais de 50 Litros',
+                                    'O' => 'Outro',
+                                ];
+
+                            }
+
+                        })
+                        ->required(),
+
+
+                    TextInput::make( 'volume.outro')
+                        ->label('Outro')
+                        ->required()
+                        ->requiredIf('quantidade', fn(Get $get) => $get('volume.quantidade') == 'O')
+                        ->visible(fn(Get $get) => $get('volume.quantidade') == 'O'),
 
                 ])->addActionLabel('Nova compostagem')
         ];
     }
 
-    public static function getTabs(): array
+    public static function getSteps(): array
     {
         return [
+            Step::make('Fotos')
+                ->schema([
+                   Repeater::make()
+                        ->schema([
+                            FileUpload::make('photo')
+                                ->hiddenLabel()
+                                ->label('Foto de identificação')
+                                ->placeholder(fn () => new HtmlString('<span><a class="text-primary-600 font-bold">Clique aqui</a></br>Para adicionar uma foto sua</span>'))
+                                ->alignCenter()
+                                ->imageEditor()
+                                ->directory('foto-formulario')
+                                ->imagePreviewHeight('250')
+                                ->previewable(true)
+                                ->columnSpan(1)
+                                ->columnStart([
+                                    'default' => 1,
+                                    'lg' => 3,
+                                ])
+                                ->imageCropAspectRatio('1:1')
+                                ->loadingIndicatorPosition('center')
+                                ->panelAspectRatio('1:1')
+                                ->removeUploadedFileButtonPosition('top-center')
+                                ->uploadButtonPosition('center')
+                                ->uploadProgressIndicatorPosition('center')
+                                ->imageEditorMode(2)
+                                ->panelLayout('integrated')
+                                ->imageEditorEmptyFillColor('#000000')
+                                ->required(),
+                        ])
+                ]),
             Step::make('Residuo')
                 ->columns(2)
-                ->schema(self::getFormSchema()),
-            Step::make('Fotos')
                 ->schema(self::getFormSchema()),
 
         ];

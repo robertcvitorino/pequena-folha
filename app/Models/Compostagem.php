@@ -16,6 +16,11 @@ class Compostagem extends Model
         'descricao',
         'volume',
         'tipo',
+        'foto'
+    ];
+
+    protected $casts = [
+        'volume' => 'array',
     ];
 
     public function pessoa()

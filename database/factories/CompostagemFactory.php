@@ -26,8 +26,9 @@ class CompostagemFactory extends Factory
             'user_id' => $this->faker->numberBetween(1, User::count()),
             'material_id' => $this->faker->numberBetween(1, Material::count()),
             'descricao' => $this->faker->text(50),
-            'volume' => $this->faker->numberBetween(1, 100),
+            'volume' => json_decode('{  "volume":12,"volume_outro":0,}',true),
             'tipo' => $this->faker->numberBetween(0, 2),
+            'foto' => $this->faker->imageUrl(640, 480),
 
         ];
     }

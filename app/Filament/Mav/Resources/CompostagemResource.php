@@ -7,11 +7,16 @@ use App\Filament\Resources\CompostagemResource\Pages;
 use App\Filament\Resources\CompostagemResource\RelationManagers;
 use App\Filament\Resources\VisitaResource\Forms\VisitaForm;
 use App\Models\Compostagem;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Wizard;
+use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+
 
 class CompostagemResource extends Resource
 {
@@ -22,11 +27,12 @@ class CompostagemResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            Wizard::make()
+            Tabs::make()
                 ->columnSpanFull()
-                ->schema(
-                        CompostagemForm::getTabs()
+                ->schema([]
+//                    VisitaForm::getTabs()
                 ),
+
         ]);
     }
 
