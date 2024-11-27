@@ -12,7 +12,8 @@
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "owenvoke/blade-fontawesome": "^2.6",
-        "swisnl/filament-backgrounds": "^1.1"
+        "swisnl/filament-backgrounds": "^1.1",
+        "webtechnologyltda/filament-reports": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -67,5 +68,11 @@
         }
     },
     "minimum-stability": "stable",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/webtechnologyltda/filament-reports.git"
+        }
+    ],
     "prefer-stable": true
 }
