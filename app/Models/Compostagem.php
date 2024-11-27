@@ -21,6 +21,7 @@ class Compostagem extends Model
 
     protected $casts = [
         'volume' => 'array',
+        'foto' => 'array'
     ];
 
     public function pessoa()

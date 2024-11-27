@@ -2,16 +2,11 @@
 
 namespace App\Filament\Mav\Resources;
 
-use App\Filament\Mav\Resources\CompostagemResource\Form\CompostagemForm;
-use App\Filament\Resources\CompostagemResource\Pages;
-use App\Filament\Resources\CompostagemResource\RelationManagers;
-use App\Filament\Resources\VisitaResource\Forms\VisitaForm;
+use App\Filament\Mav\Resources\CompostagemResource\Pages\CreateCompostagem;
+use App\Filament\Mav\Resources\CompostagemResource\Pages\EditCompostagem;
+use App\Filament\Mav\Resources\CompostagemResource\Pages\ListCompostagems;
 use App\Models\Compostagem;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Tabs;
-use Filament\Forms\Components\Wizard;
-use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -80,19 +75,12 @@ class CompostagemResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
     public static function getPages(): array
     {
         return [
-            'index' => \App\Filament\Mav\Resources\CompostagemResource\Pages\ListCompostagems::route('/'),
-            'create' => \App\Filament\Mav\Resources\CompostagemResource\Pages\CreateCompostagem::route('/create'),
-            'edit' => \App\Filament\Mav\Resources\CompostagemResource\Pages\EditCompostagem::route('/{record}/edit'),
+            'index' => ListCompostagems::route('/'),
+            'create' => CreateCompostagem::route('/create'),
+            'edit' => EditCompostagem::route('/{record}/edit'),
         ];
     }
 }
