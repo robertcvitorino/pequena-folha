@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'data_form',
     ];
 
     /**
@@ -42,6 +43,22 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'data_form' => 'array',
         ];
+    }
+
+    public function telefones()
+    {
+        return $this->hasMany(Telefone::class);
+    }
+
+    public function enderecos()
+    {
+        return $this->hasMany(Endereco::class);
+    }
+
+    public function compostagens()
+    {
+        return $this->hasMany(Compostagem::class);
     }
 }

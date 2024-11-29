@@ -9,10 +9,10 @@ class Telefone extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['pessoa_id', 'numero', 'principal'];
+    protected $fillable = ['user_id', 'numero', 'principal'];
 
-    public function pessoa()
+    public function user()
     {
-        return $this->belongsTo(Pessoa::class);
+        return $this->belongsTo(User::class);
     }
 }

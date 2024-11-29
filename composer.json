@@ -6,11 +6,15 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "andreiio/blade-iconoir": "^4.6",
+        "blade-ui-kit/blade-heroicons": "^2.5",
         "eduard9969/blade-polaris-icons": "^2.7",
         "filament/filament": "^3.2",
         "joshembling/image-optimizer": "^1.4",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
+        "leandrocfe/filament-apex-charts": "^3.1",
+        "leandrocfe/filament-ptbr-form-fields": "^3.0",
         "owenvoke/blade-fontawesome": "^2.6",
         "swisnl/filament-backgrounds": "^1.1",
         "webtechnologyltda/filament-reports": "^1.0"

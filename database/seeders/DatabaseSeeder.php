@@ -25,11 +25,9 @@ class DatabaseSeeder extends Seeder
             ]);
         } else {
             $this->call([
-                PessoaSeeder::class,
+                UserSeeder::class,
                 EnderecoSeeder::class,
                 TelefoneSeeder::class,
-                UserSeeder::class,
-                MaterialSeeder::class,
                 CompostagemSeeder::class,
             ]);
         }

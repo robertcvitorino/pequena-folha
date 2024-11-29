@@ -8,15 +8,17 @@ use Filament\Support\Contracts\HasLabel;
 
 enum TipoResiduo: int implements HasColor, HasLabel, HasIcon
 {
-    case Organico = 0;
-    case Inorganico = 1;
-    case Rejeito = 2;
+    case Organico = 1;
+    case Inorganico = 2;
+    case Rejeito = 3;
+
+
 
     public function getColor(): string|array|null
     {
         return match ($this) {
-            self::Organico => 'warning',
-            self::Inorganico => 'success',
+            self::Organico => 'success',
+            self::Inorganico => 'warning',
             self::Rejeito => 'danger'
         };
     }
@@ -24,13 +26,13 @@ enum TipoResiduo: int implements HasColor, HasLabel, HasIcon
     public function getIcon(): ?string
     {
         return match ($this) {
-            self::Organico => 'fas-clock',
-            self::Inorganico => 'polaris-payment-icon',
-            self::Rejeito => 'fas-xmark'
+            self::Organico => 'iconoir-organic-food',
+            self::Inorganico => 'fas-recycle',
+            self::Rejeito => 'heroicon-s-trash'
         };
     }
 
-    public function getLabel(): string
+    public function  getLabel(): string
     {
         return match ($this) {
             self::Organico => 'Organico',
@@ -38,4 +40,5 @@ enum TipoResiduo: int implements HasColor, HasLabel, HasIcon
             self::Rejeito => 'Rejeito'
         };
     }
+
 }
