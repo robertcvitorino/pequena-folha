@@ -10,7 +10,7 @@ class Endereco extends Model
     use HasFactory;
 
     protected $fillable = [
-        'pessoa_id',
+        'user_id',
         'cep',
         'rua',
         'numero',
@@ -20,9 +20,9 @@ class Endereco extends Model
         'estado',
     ];
 
-    public function pessoa()
+    public function user()
     {
-        return $this->belongsTo(Pessoa::class);
+        return $this->belongsTo(User::class);
     }
 
 }

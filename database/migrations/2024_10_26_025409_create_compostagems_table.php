@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->dateTime('data')->nullable();
             $table->foreignId('user_id')->nullable()->constrained('users');
-            $table->foreignId('material_id')->nullable()->constrained('materials');
             $table->string('descricao')->nullable();
             $table->integer('tipo')->default(0);
             $table->string('foto')->nullable();
             $table->json('volume')->nullable();
+            $table->json('material')->nullable();
             $table->timestamps();
         });
     }

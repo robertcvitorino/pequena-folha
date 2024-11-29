@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Pessoa;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,7 +21,7 @@ class TelefoneFactory extends Factory
         return [
             'numero' => $this->faker->phoneNumber,
             'principal' => $this->faker->boolean,
-            'pessoa_id' => $this->faker->numberBetween(1, Pessoa::count()),
+            'user_id' => $this->faker->numberBetween(1, User::count()),
         ];
     }
 }

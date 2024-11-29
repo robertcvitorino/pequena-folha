@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\TipoResiduo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,28 +10,25 @@ class Compostagem extends Model
 {
     use HasFactory;
 
-    protected  $fillable = [
+    protected $fillable = [
         'data',
-        'pessoa_id',
-        'material_id',
+        'user_id',
+        'material',
         'descricao',
         'volume',
         'tipo',
-        'foto'
+        'foto',
     ];
 
     protected $casts = [
         'volume' => 'array',
-        'foto' => 'array'
+        'material' => 'array',
+        'foto' => 'array',
+        'tipo' => TipoResiduo::class
     ];
 
-    public function pessoa()
+    public function user()
     {
-        return $this->belongsTo(Pessoa::class);
-    }
-
-    public function material()
-    {
-        return $this->belongsTo(Material::class, );
+        return $this->belongsTo(User::class);
     }
 }

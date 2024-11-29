@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Pessoa;
+use http\Client\Curl\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -26,7 +27,7 @@ class EnderecoFactory extends Factory
             'cidade' => $this->faker->city(),
             'estado' => $this->faker->stateAbbr(),
             'principal' => $this->faker->boolean,
-            'pessoa_id' => $this->faker->numberBetween(1, Pessoa::count()),
+            'user_id' => $this->faker->numberBetween(1, \App\Models\User::count()),
         ];
     }
 }

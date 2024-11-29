@@ -40,7 +40,6 @@ class MavPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Mav/Resources'), for: 'App\\Filament\\Mav\\Resources')
             ->discoverPages(in: app_path('Filament/Mav/Pages'), for: 'App\\Filament\\Mav\\Pages')
             ->pages([
-                Pages\Dashboard::class,
             ])
             ->plugins([
                 FilamentBackgroundsPlugin::make()
@@ -50,8 +49,6 @@ class MavPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Mav/Widgets'), for: 'App\\Filament\\Mav\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
