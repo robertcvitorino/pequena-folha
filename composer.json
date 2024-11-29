@@ -17,10 +17,11 @@
         "leandrocfe/filament-ptbr-form-fields": "^3.0",
         "owenvoke/blade-fontawesome": "^2.6",
         "swisnl/filament-backgrounds": "^1.1",
-        "webtechnologyltda/filament-reports": "^1.0"
+        "webtechnologyltda/filament-reports": "^1.0",
+        "fakerphp/faker": "^1.23"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.23",
+
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.6",
